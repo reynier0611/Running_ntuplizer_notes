@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 
+\usepackage{comment}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{amssymb}
@@ -143,6 +144,31 @@ if you used alien.py, you just use rm -r like a normal shell
 from alimonitor.cern.ch, you can click "My home dir" in the top toolbar to navigate that from a web browser, but I have yet to figure out how to remove files through that. So instead we go through alien.py/aliensh
 
 % ================================================================
+\subsection{Checking job status after completion}
+From lxplus, depending on exactly which version of AliPhysics you have, you either do \verb|aliensh| or \verb|alien.py| (from anywhere).
+Then, type \verb|masterjob <JobId>|.
+Here's the actual plethora of options:
+
+\begin{tcolorbox}
+\begin{verbnobox}[\scriptsize]
+usage: masterjob   <jobId> [-options] [merge|kill|resubmit|expunge]
+options:
+                    -status <status>       :  display only the subjobs with that status
+                    -id <id>               :  display only the subjobs with that id
+                    -site <id>             :  display only the subjobs on that site
+                    -printid               :  print also the id of all the subjobs
+                    -printsite             :  split the number of jobs according to the execution site
+                    merge                  :  collect the output of all the subjobs that have already finished
+                    kill                   :  kill all the subjobs
+                    resubmit               :  resubmit all the subjobs selected
+                    expunge                :  delete completely the subjobs
+                    You can combine kill and resubmit with '-status <status>' and '-id <id>'.
+                    For instance, if you do something like 'masterjob <jobId> -status ERROR_IB resubmit',
+                     all the subjobs with status ERROR_IB will be resubmitted
+\end{verbnobox}
+\end{tcolorbox}
+
+% ================================================================
 \subsection{Checking output files}
 
 \begin{itemize}
@@ -152,6 +178,8 @@ from alimonitor.cern.ch, you can click "My home dir" in the top toolbar to navig
 \end{itemize}
 
 % ========================================================================================
+\begin{comment}
+
 \newpage
 
 \section{Email from Alwina (07/15/2020)}
@@ -250,6 +278,7 @@ Run locally.
 Need to install Alibuild.
 Run with python 3.7 or higher.
 
+\end{comment}
 
 %\bibliography{bib_file}
 %\bibliographystyle{ieeetr}

@@ -41,25 +41,28 @@
 % ========================================================================================
 \newpage
 
-\section{Running jobs with ntuplizer}
+\section{Running jobs with the ntuplizer}
 
 Jobs are run on lxplus, then copied to and merged and stored on Cori. Lastly, the output files should be deleted from the grid.
+My lxplus and cori usernames are \color{olive}\verb|rcruztor|\color{black} \ and \color{olive}\verb|reynier|\color{black} \ respectively. Please, modify these for yourself accordingly. I colored them throughout the document so that you can quickly identify where to change the commands.
+Additionally, I am creating the examples below based on the job with identifier `19i3c2' and $\hat p_T$ `pthat1'. Also update those specifically based on what you would like to run.
+Finally, this example uses the \verb|VO_ALICE@AliPhysics::vAN-20201205_ROOT6-1| version of AliPhysics. This may be different for your job. You can find the specific version you need in the config file you will use.
 
 % ================================================================
 \subsection{Running jobs on lxplus}
 
 \begin{itemize}
-\item ssh into lxplus: \verb|ssh rcruztor@lxplus.cern.ch|
+\item ssh into lxplus: \verb|ssh |\color{olive} \verb|rcruztor|\color{black}\verb|@lxplus.cern.ch|
 
 \color{red}
-\item clone ntuplizer (only once): \verb|https://github.com/alwina/ntuple-gj.git|
+\item clone the ntuplizer (only once): \verb|git clone https://github.com/alwina/ntuple-gj.git|
 \color{black}
 
 \item execute the following two commands (possibly add them to the bashrc file):
 
 \begin{itemize}
 \item \verb|source /cvmfs/alice.cern.ch/etc/login.sh|
-\item \verb|alienv enter VO_ALICE@AliPhysics::vAN-20200629_ROOT6-1|
+\item \verb|alienv enter VO_ALICE@AliPhysics::vAN-20201205_ROOT6-1|
 \end{itemize}
 
 \item cd into the ntuplizer main directory
@@ -74,12 +77,12 @@ Jobs are run on lxplus, then copied to and merged and stored on Cori. Lastly, th
 \subsection{Copying, merging, and storing jobs on Cori}
 
 \begin{itemize}
-\item \verb|ssh -Y reynier@cori.nersc.gov|
+\item \verb|ssh -Y |\color{olive}\verb|reynier|\color{black}\verb|@cori.nersc.gov|
 
 \color{red}
 \item from lxplus (only once):
 
-\verb|scp -r ~/.globus reynier@cori.nersc.gov:/global/homes/r/reynier/|
+\verb|scp -r ~/.globus |\color{olive}\verb|reynier|\color{black}\verb|@cori.nersc.gov:/global/homes/r/|\color{olive}\verb|reynier|\color{black}\verb|/|
 
 \item add the following to your .bashrc file (only once):
 
@@ -101,7 +104,7 @@ fi
 
 \item \verb|alish| and if that does not work, do \verb|module load AliPhysics| instead.
 
-\item \verb|cd /project/projectdirs/alice/reynier|
+\item \verb|cd /project/projectdirs/alice/|\color{olive}\verb|reynier|\color{black}
 
 \color{red}
 \item clone ntuplizer (only once): \verb|https://github.com/alwina/ntuple-gj.git|
@@ -109,25 +112,25 @@ fi
 
 \item cd into the ntuplizer main directory
 
-\item \verb|alien-token-init rcruztor|
+\item \verb|alien-token-init |\color{olive}\verb|rcruztor|\color{black}
 
 \item To copy (on cori - note the 8 at the end of the second line):
 
 \verb|./macros/alien_fastcopy \|
 
-\verb|/alice/cern.ch/user/r/rcruztor/workingdir/outputdir_19i3c2_pthat1 \|
+\verb|/alice/cern.ch/user/r/|\color{olive}\verb|rcruztor|\color{black}\verb|/workingdir/outputdir_19i3c2_pthat1 \|
 
-\verb|/global/project/projectdirs/alice/reynier/19i3c2/pthat1 8|
+\verb|/global/project/projectdirs/alice/|\color{olive}\verb|reynier|\color{black}\verb|/19i3c2/pthat1 8|
 
 \item To merge (on cori - note the \verb|""| and \verb|/*|):
 
 \verb|./macros/MergeNtuple.C \|
 
-\verb|"/global/project/projectdirs/alice/reynier/19i3c2/pthat1/*/*/AnalysisResults.root" \|
+\verb|"/global/project/projectdirs/alice/|\color{olive}\verb|reynier|\color{black}\verb|/19i3c2/pthat1/*/*/AnalysisResults.root" \|
 
-\verb|/global/project/projectdirs/alice/reynier/19i3c2/18q_embed_19i3c2_pthat1.root|
+\verb|/global/project/projectdirs/alice/|\color{olive}\verb|reynier|\color{black}\verb|/19i3c2/18q_embed_19i3c2_pthat1.root|
 
-* Replace /global/project/projectdirs/alice/reynier/19i3c2/pthat1 as you like
+* Replace /global/project/projectdirs/alice/\color{olive}\verb|reynier|\color{black}/19i3c2/pthat1 as you like
 
 * Be careful in the final merging step. You will overwrite any existing file of the same name. One option is to create the merged ntuple somewhere else and then move it into NTuples/embed when it's done.
 \end{itemize}
